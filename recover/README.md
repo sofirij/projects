@@ -1,6 +1,3 @@
-
-Here's a detailed README file for the recover project, which outlines the process of recovering JPEG files from a forensic image of a memory card.
-
 Recover
 Overview
 The goal of this project is to recover JPEG images from a forensic image of a memory card. The forensic image, named card.raw, is a binary file that contains the raw bytes from the memory card. The task is to identify and extract JPEG files from this image based on specific byte patterns and save them as separate JPEG files.
