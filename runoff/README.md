@@ -43,12 +43,10 @@ How to Compile and Run the Program
 Compile: Use GCC or any C compiler to compile the program.
 
 bash
-Copy code
 gcc runoff.c -o runoff
 Run: Execute the compiled program and provide the required inputs.
 
 bash
-Copy code
 ./runoff
 Input: Enter the number of voters and candidates when prompted, and then enter each voter’s ranked choices.
 
