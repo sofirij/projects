@@ -1,0 +1,68 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    portfolio
+{% endblock %}
+
+{% block main %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th></th>
+                <th>STOCKS</th>
+                <th>SHARES</th>
+                <th>PRICE</th>
+                <th>HOLDINGS</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% set ns = namespace(totalHoldings = 0) %}
+            {% for finance in finances %}
+                <tr>
+                    {% set symbol =  finance.symbol %}
+                    {% set shares = finance.shares %}
+                    {% set price = lookup(symbol).price %}
+                    {% set holding = shares * price %}
+                    {% set ns.totalHoldings = ns.totalHoldings + holding %}
+                    <td></td>
+                    <td>{{ finance.symbol }}</td>
+                    <td>{{ shares }}</td>
+                    <td>{{ price | usd}}</td>
+                    <td>{{ holding | usd}}</td>
+                </tr>
+            {% endfor %}
+
+            <tr>
+                <td>TOTAL</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>TOTAL HOLDINGS</td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>{{ ns.totalHoldings | usd}}</td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>+ {{ cash | usd}}</td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>BALANCE</td>
+                <td>${{ cash + ns.totalHoldings }}</td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}
