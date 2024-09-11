@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    history
+{% endblock %}
+
+{% block main %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>STOCKS</th>
+                <th>DATE</th>
+                <th>TYPE</th>
+                <th>SHARES</th>
+                <th>AMOUNT SPENT</th>
+                <th>AMOUNT GAINED</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for finance in finances %}
+                <tr>
+                    <td>{{ finance.id }}</td>
+                    <td>{{ finance.symbol }}</td>
+                    <td>{{ finance.timestamp }}</td>
+                    <td>{{ finance.type }}</td>
+                    <td>{{ finance.shares }}</td>
+                    <td>{{ finance.amountSpent | float | round(2) | usd}}</td>
+                    <td>{{ finance.amountGained | float | round(2) | usd}}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
