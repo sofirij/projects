@@ -33,6 +33,8 @@ The application uses an SQLite3 database with three main tables:
    - `stock_symbol`: The symbol of the owned stock.
    - `quantity`: Number of shares currently owned by the user.
    - `average_cost`: Average cost per share based on purchase history.
+  
+##Note line 54 - 56 in helpers.py is temporary as the API was down at the time of push
 
 ## Getting Started
 
@@ -48,7 +50,7 @@ The application uses an SQLite3 database with three main tables:
 1. Clone the repository:
    ```bash
    git clone https://github.com/sofirij/finance.git
-   cd yourrepository
+   cd finance
 2. Install the required packages:
     pip install -r requirements.txt
 3. flask run
