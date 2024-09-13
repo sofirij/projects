@@ -1,0 +1,112 @@
+{% extends "layout.html" %}
+
+{% block title %} inventory {% endblock %}
+
+{% block main %}
+    <div class="mb-3">
+        <form action="/inventory" method="post">
+            <button class="btn btn-primary" value="add" name="add" type="submit">Add</button>
+        </form>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Category</th>
+                <th>Name</th>
+                <th>Condition</th>
+                <th>Pickup Location</th>
+                <th>Amount Available</th>
+                <th>Price</th>
+                <th>Description</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for item in inventory %}
+                <div class="mb-3">
+                    <tr>
+                        <td>{{ item.category }}</td>
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.condition }}</td>
+                        <td>{{ item.pickupLocation}}</td>
+                        <td>{{ item.amountAvailable}}</td>
+                        <td>{{ item.price | usd}}</td>
+                        <td>{{ item.description}}</td>
+                        <form action="/inventory" method="post">
+                            <input type="hidden" name="id" value="{{ item.id }}">
+                            <td>
+                                <button class="btn btn-primary" name="edit" value="edit" type="submit">Edit</button>
+                            </td>
+                            <td>
+                                <button class="btn btn-primary" name="remove" value="remove" type="submit">Remove</button>
+                            </td>
+                        </form>
+                    </tr>
+                </div>
+            {% endfor %}
+
+            {% if add %}
+                <tr>
+                    <form action="/addInventory" method="post">
+                        <td>
+                            <div class="mb-3">
+                                <select name="category">
+                                    {% for category in categories %}
+                                        <option value="{{ category.category }}">{{ category.category }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="mb-3">
+                                <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="name" placeholder="Name of item or service" type="text">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="mb-3">
+                                <select name="condition">
+                                    {% for condition in conditions %}
+                                        <option value="{{ condition.condition }}">{{ condition.condition }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="mb-3">
+                                <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="pickupLocation" placeholder="Pickup Location" type="text">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="mb-3">
+                                <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="amountAvailable" placeholder="amountAvailable" type="text">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="mb-3">
+                                <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="price" placeholder="Price" type="text">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="mb-3">
+                                <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="description" placeholder="Description if necessary" type="text">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="mb-3">
+                                <button class="btn btn-primary" name="undoAdd" value="undoAdd" type="submit">Undo</button>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="mb-3">
+                                <button class="btn btn-primary" name="update" type="submit">Update</button>
+                            </div>
+                        </td>
+                    </form>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+{% endblock %}

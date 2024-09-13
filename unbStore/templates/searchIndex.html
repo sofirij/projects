@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+
+{% block title %} homepage {% endblock %}
+
+{% block main %}
+    <form action="/" method="post">
+        <div class="mb-3">
+            <label for="category">Choose a category</label>
+            <select id="category" name="category">
+                {% for category in categories %}
+                    <option value="{{ category.category }}">{{ category.category }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <input class="form-control mx-auto w-auto" name="name" placeholder="Name of item or service" type="text">
+        </div>
+        <div class="mb-3">
+            <button class="btn btn-primary" type="submit">Search</button>
+        </div>
+    </form>
+
+    {% if inventory %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <td>Name</td>
+                    <td>Condition</td>
+                    <td>Pickup Location</td>
+                    <td>Amount Available</td>
+                    <td>Price</td>
+                    <td>Description</td>
+                    <td>Seller</td>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    {% for item in inventory %}
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.condition }}</td>
+                        <td>{{ item.pickupLocation }}</td>
+                        <td>{{ item.amountAvailable }}</td>
+                        <td>{{ item.price | usd }}</td>
+                        <td>{{ item.description }}</td>
+                        <td>{{ item.username }}</td>
+                    {% endfor %}
+                </tr>
+            </tbody>
+        </table>
+    {% else %}
+        <div class="mb-3">
+            <span>No results found</span>
+        </div>
+    {% endif %}
+
+{% endblock %}
