@@ -1,2 +1,2 @@
-This is a public repository to display finished projects.
-All development takes place in a private repository before it is published here.
+This is to showcase fun little things I have worked on.
+UNB 
